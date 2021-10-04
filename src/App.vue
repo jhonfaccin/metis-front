@@ -1,33 +1,19 @@
 <template>
-    <div id="nav" class="sb-globalNav globalNav___1xPib globalNavFixed___3HZKz">
-        <router-link to="/">Home</router-link>|
-        <router-link to="/about">About</router-link>
-    </div>
+    <Header/>
     <router-view/>
 </template>
 
+<script>
+// import Header from "@/components/Header.vue";
+
+// export default {
+// 	name: "Home",
+// 	components: {
+// 		Header
+// 	}
+// };
+</script>
 
 <style>
 
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    background-color: lightslategrey
-}
-#nav {
-    padding: 30px;
-    background-color: deeppink
-}
-#nav a {
-    font-weight: bold;
-    color:blue;
-    background-color: darkgoldenrod
-}
-#nav a.router-link-exact-active {
-    color: #42b983;
-    background-color: brown
-}
 </style>
