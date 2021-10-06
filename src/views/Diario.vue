@@ -1,18 +1,21 @@
 <template>
-    <Header/>
-    <div class="text-center">
-        <h1>Sobre</h1>
+       <Header/>
+    <div>
+       Meu diário
     </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import Header from "@/components/Header.vue";
 
 export default {
-	name: "About",
+	name:"Diario",
 	components: {
 		Header
 	}
 };
 </script>
+
+<style scoped>
+
+</style>

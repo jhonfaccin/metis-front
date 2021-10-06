@@ -10,13 +10,13 @@
 			<div id="menu-items" :class="{active:menuActive}">
 				<ul>
 					<li>
-						<router-link to="">Home</router-link>|
+						<router-link to="/">Início</router-link>
 					</li>
 					<li>
-						<router-link to="/about">About</router-link>
+						<router-link to="/diario">Meu diário</router-link>
 					</li>
 					<li>
-						<router-link to="/about">About</router-link>
+						<router-link to="/about">Sobre</router-link>
 					</li>
 					<li>
 						<router-link to="/about">About</router-link>
@@ -82,7 +82,7 @@ export default {
 		left: 0;
 		width: 40%;
 		height: 100vh;
-		background-color: #000000;
+        background-color: #000000;
 		opacity: 0.8;
 	}
 	#menu-items {
