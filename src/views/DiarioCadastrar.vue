@@ -30,6 +30,7 @@
 
 <script>
 import Header from "@/components/Header.vue";
+import api from "../services/api.js";
 
 export default {
 	name: "Home",
@@ -51,6 +52,9 @@ export default {
 			diario.data = this.calendario;
 			console.log(diario);
 			// console.log(today.toLocaleDateString("en-US"));
+			api.post("/about.json").then(response => {
+				console.log(response.data);
+			});
 		}
 	},
 };
