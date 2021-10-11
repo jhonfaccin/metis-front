@@ -8,13 +8,13 @@
 					<form class="form-inline">
 						<div class="form-group mb-2">
 							<label>Como foi seu dia?</label>
-							<textarea v-model="inputDia" class="form-control" rows="6"></textarea>
+							<textarea  v-model="diario.inputDia" class="form-control" rows="6"></textarea>
 							<br />
 							<label>Pelo que você é grato(a) hoje?</label>
 							<br />
-							<textarea v-model="inputGratidao" class="form-control" rows="4"></textarea>
+							<textarea v-model="diario.inputGratidao" class="form-control" rows="4"></textarea>
 							<br />
-							<v-date-picker v-model="calendario">
+							<v-date-picker v-model="diario.calendario">
 								<template v-slot="{ inputValue, inputEvents }">
 									<input class="form-control" id="calendario" :value="inputValue" v-on="inputEvents" />
 								</template>
@@ -39,20 +39,19 @@ export default {
 	},
 	data() {
 		return {
-			inputDia: "",
-			inputGratidao: "",
-			calendario: new Date(),
+			diario:{
+				inputDia: "",
+				inputGratidao: "",
+				calendario: new Date(),
+			}
+			
 		};
 	},
 	methods: {
 		cadastrar(){
-			let diario = {};
-			diario.textoDia = this.inputDia;
-			diario.textoGratidao = this.inputGratidao;
-			diario.data = this.calendario;
-			console.log(diario);
-			// console.log(today.toLocaleDateString("en-US"));
-			api.post("/about.json").then(response => {
+			// console.log(this.diario.calendario.toLocaleDateString("en-US"));
+			//console.log(this.diario.calendario.toLocaleTimeString(navigator.language, {hour: "2-digit", minute:"2-digit"}));
+			api.post("/diario.json",this.diario).then(response => {
 				console.log(response.data);
 			});
 		}
@@ -66,7 +65,7 @@ export default {
     }
     #calendario{
         width: 35%;
-    }
+	}
 
 	@media (min-width: 700px) {
 	}
