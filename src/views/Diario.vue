@@ -18,6 +18,7 @@ export default {
 	},
 	methods: {
 		goToAnotarDiario() {
+			console.log(this.window);
 			this.$router.push("/cadastrarDiario");
 		}
 	}

@@ -1,0 +1,60 @@
+<template>
+<Header/>
+	<div class="container">
+		<div class="card position-absolute top-50 start-50 translate-middle">
+			<div class="card-body">
+				<div class="mb-3">
+			<input
+				type="email"
+				class="form-control"
+				placeholder="Email"
+                required
+				v-model="usuario.email"
+			/>
+		</div>
+		<div class="mb-3">
+			<input class="form-control" type="password" placeholder="senha" required v-model="usuario.password"/>
+		</div>
+		<div class="d-grid gap-2">
+			<button v-on:click="cadastrar()" type="button" class="btn btn-primary">Acessar</button>
+		</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+import axios from "axios";
+import Header from "@/components/Header.vue";
+
+export default {
+	nome: "Login",
+	components: {
+		Header
+	},
+	data() {
+		return {
+			usuario:{
+				email: "",
+				password: "",
+			}
+			
+		};
+	},
+	methods: {
+		cadastrar(){
+			axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_API_KEY}`,
+				this.usuario).then(response => {
+				console.log(response.data);
+			});
+			
+		}
+	},
+};
+</script>
+
+<style scoped>
+	.card {
+		width: 55%;
+	}
+</style>

@@ -54,6 +54,7 @@ export default {
 			api.post("/diario.json",this.diario).then(response => {
 				console.log(response.data);
 			});
+			
 		}
 	},
 };
