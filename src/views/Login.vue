@@ -17,7 +17,7 @@
 					/>
 				</div>
 				<div class="d-grid gap-2">
-					<button v-on:click="cadastrar()" type="button" class="btn btn-primary">Acessar</button>
+					<button v-on:click="acessar()" type="button" class="btn btn-primary">Acessar</button>
 				</div>
 			</div>
 		</div>
@@ -25,8 +25,9 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 import Header from "@/components/Header.vue";
+import firebase from "firebase";
 
 export default {
 	nome: "Login",
@@ -36,21 +37,26 @@ export default {
 	data() {
 		return {
 			usuario: {
-				email: "",
-				password: ""
+				email: "jhon@gmail.com",
+				password: "123456"
 			}
 		};
 	},
 	methods: {
-		cadastrar() {
-			axios
-				.post(
-					`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_API_KEY}`,
-					this.usuario
-				)
-				.then(response => {
-					console.log(response.data);
-				});
+		acessar() {
+			// console.log(firebase.auth());
+			// console.log(firebase.auth());
+			// axios
+			// 	.post(
+			// 		`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_API_KEY}`,
+			// 		this.usuario
+			// 	)
+			// 	.then(response => {
+			// 		console.log(response.data);
+			// 	});
+			firebase.auth().signInWithEmailAndPassword(this.usuario.email,this.usuario.password).then(response => {
+				console.log(response);
+			});
 		}
 	}
 };
