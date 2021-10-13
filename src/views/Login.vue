@@ -44,18 +44,12 @@ export default {
 	},
 	methods: {
 		acessar() {
-			// console.log(firebase.auth());
-			// console.log(firebase.auth());
-			// axios
-			// 	.post(
-			// 		`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_API_KEY}`,
-			// 		this.usuario
-			// 	)
-			// 	.then(response => {
-			// 		console.log(response.data);
-			// 	});
 			firebase.auth().signInWithEmailAndPassword(this.usuario.email,this.usuario.password).then(response => {
-				console.log(response);
+				window.uid = response.user.uid;
+				this.$router.push("/home");
+			}).catch(erro => {
+				console.log("AAAAAAAAAA");
+				console.log(erro);
 			});
 		}
 	}

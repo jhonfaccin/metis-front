@@ -11,14 +11,12 @@ import firebase from "firebase";
 import VCalendar from "v-calendar";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyDnymQWac0RfCQRtPsjwRF_pwdDCPo0eVc",
-	authDomain: "metis-back.firebaseapp.com",
-	databaseURL: "https://metis-back-default-rtdb.firebaseio.com",
-	projectId: "metis-back",
-	storageBucket: "metis-back.appspot.com",
-	messagingSenderId: "1048612874378",
-	appId: "1:1048612874378:web:a7ecf585ef126dc4852573",
-	measurementId: "G-PR29TWS401"
+	apiKey: process.env.VUE_APP_API_KEY,
+	authDomain: process.env.VUE_APP_AUTH_DOMAIN,
+	databaseURL: process.env.VUE_APP_DATABASE_URL,
+	projectId: process.env.VUE_APP_PROJECT_ID,
+	storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
+	messagingSenderId: process.env.VUE_APP_MESSAGING_SENDER_ID,
 };
 
 firebase.initializeApp(firebaseConfig);
