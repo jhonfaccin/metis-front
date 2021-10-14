@@ -3,7 +3,8 @@
 	<div class="container">
 		<!-- <div class="card position-absolute top-50 start-50 translate-middle"> -->
 		<div class="Absolute-Center is-Responsive">
-			<div class="card-body">
+			<h4 class="textalert alert-danger" v-if="exibeMensagem">{{mensagemErro}}</h4>
+			<div>
 				<div class="mb-3">
 					<input type="email" class="form-control" placeholder="Email" required v-model="usuario.email" />
 				</div>
@@ -25,7 +26,6 @@
 </template>
 
 <script>
-// import axios from "axios";
 import Header from "@/components/Header.vue";
 import firebase from "firebase";
 
@@ -36,22 +36,33 @@ export default {
 	},
 	data() {
 		return {
+			mensagemErro:"Email ou senha inválidos!",
+			exibeMensagem: false,
 			usuario: {
-				email: "jhon@gmail.com",
-				password: "123456"
+				email: "",
+				password: ""
 			}
 		};
 	},
 	methods: {
 		acessar() {
+			this.exibeMensagem = false;
 			firebase.auth().signInWithEmailAndPassword(this.usuario.email,this.usuario.password).then(response => {
 				window.uid = response.user.uid;
 				this.$router.push("/home");
 			}).catch(erro => {
+				this.exibeMensagem = true;
 				console.log("AAAAAAAAAA");
 				console.log(erro);
 			});
 		}
+	},
+	beforeRouteEnter (to, from, next) {
+		next(vm => {
+			if(window.uid){
+				vm.$router.push({name: "Home"});
+			}
+		});
 	}
 };
 </script>

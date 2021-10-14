@@ -30,7 +30,9 @@
 
 <script>
 import Header from "@/components/Header.vue";
-import api from "../services/api.js";
+// import api from "../services/api.js";
+import firebase from "firebase";
+
 
 export default {
 	name: "Home",
@@ -51,9 +53,18 @@ export default {
 		cadastrar(){
 			// console.log(this.diario.calendario.toLocaleDateString("en-US"));
 			//console.log(this.diario.calendario.toLocaleTimeString(navigator.language, {hour: "2-digit", minute:"2-digit"}));
-			api.post("/diario.json",this.diario).then(response => {
-				console.log(response.data);
-			});
+			// api.post("/diario.json",this.diario).then(response => {
+			// 	console.log(response.data);
+			// });
+			// this.diario.registroData.toString();
+			console.log(this.diario);
+			const db = firebase.database().ref(window.uid);
+			let diario = {
+				dia: "aaa",
+				gra: "bbbb",
+				data: this.diario.calendario.getTime()
+			};
+			db.push(diario);
 			
 		}
 	},
