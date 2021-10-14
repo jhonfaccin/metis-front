@@ -3,7 +3,8 @@
 	<div class="container">
 		<!-- <div class="card position-absolute top-50 start-50 translate-middle"> -->
 		<div class="Absolute-Center is-Responsive">
-			<div class="card-body">
+			<h4 class="textalert alert-danger" v-if="exibeMensagem">{{mensagemErro}}</h4>
+			<div>
 				<div class="mb-3">
 					<input type="email" class="form-control" placeholder="Email" required v-model="usuario.email" />
 				</div>
@@ -17,7 +18,7 @@
 					/>
 				</div>
 				<div class="d-grid gap-2">
-					<button v-on:click="cadastrar()" type="button" class="btn btn-primary">Acessar</button>
+					<button v-on:click="acessar()" type="button" class="btn btn-primary">Acessar</button>
 				</div>
 			</div>
 		</div>
@@ -25,8 +26,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import Header from "@/components/Header.vue";
+import firebase from "firebase";
 
 export default {
 	nome: "Login",
@@ -35,6 +36,8 @@ export default {
 	},
 	data() {
 		return {
+			mensagemErro:"Email ou senha inválidos!",
+			exibeMensagem: false,
 			usuario: {
 				email: "",
 				password: ""
@@ -42,16 +45,24 @@ export default {
 		};
 	},
 	methods: {
-		cadastrar() {
-			axios
-				.post(
-					`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_API_KEY}`,
-					this.usuario
-				)
-				.then(response => {
-					console.log(response.data);
-				});
+		acessar() {
+			this.exibeMensagem = false;
+			firebase.auth().signInWithEmailAndPassword(this.usuario.email,this.usuario.password).then(response => {
+				window.uid = response.user.uid;
+				this.$router.push("/home");
+			}).catch(erro => {
+				this.exibeMensagem = true;
+				console.log("AAAAAAAAAA");
+				console.log(erro);
+			});
 		}
+	},
+	beforeRouteEnter (to, from, next) {
+		next(vm => {
+			if(window.uid){
+				vm.$router.push({name: "Home"});
+			}
+		});
 	}
 };
 </script>

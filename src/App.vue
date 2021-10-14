@@ -1,10 +1,11 @@
 <template>
     <!-- <Header/> -->
     <router-view/>
+    <div></div>
 </template>
 
 <script>
-// import Header from "@/components/Header.vue";
+import firebase from "firebase";
 
 // export default {
 // 	name: "Home",
@@ -12,6 +13,21 @@
 // 		Header
 // 	}
 // };
+
+
+export default {
+	name: "App",
+	mounted() {
+		firebase.auth().onAuthStateChanged(user => {
+			window.uid = user ? user.uid : null;
+			if (window.uid){
+				this.$router.push("/home");
+			} else{
+				this.$router.push("/login");
+			}
+		});
+	},
+};
 </script>
 
 <style>
