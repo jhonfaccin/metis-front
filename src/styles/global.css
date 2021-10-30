@@ -9,7 +9,8 @@
 } */
 
 :root {
-	--color-background: #f3f3f3;
+    --color-background: #f3f3f3;
+    /* background-color: #e6fff7; */
     /* --color-background-nav: #2b3d50; */
     --color-background-nav: #46B0A3;
 	--color-background-home: #344960;
