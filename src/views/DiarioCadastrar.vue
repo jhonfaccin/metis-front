@@ -14,7 +14,7 @@
 							<br />
 							<textarea v-model="diario.inputGratidao" class="form-control" rows="4"></textarea>
 							<br />
-							<v-date-picker v-model="diario.calendario">
+							<v-date-picker v-model="diario.calendario" >
 								<template v-slot="{ inputValue, inputEvents }">
 									<input class="form-control" id="calendario" :value="inputValue" v-on="inputEvents" />
 								</template>
@@ -51,21 +51,31 @@ export default {
 	},
 	methods: {
 		cadastrar(){
-			// console.log(this.diario.calendario.toLocaleDateString("en-US"));
-			//console.log(this.diario.calendario.toLocaleTimeString(navigator.language, {hour: "2-digit", minute:"2-digit"}));
-			// api.post("/diario.json",this.diario).then(response => {
-			// 	console.log(response.data);
-			// });
-			// this.diario.registroData.toString();
-			console.log(this.diario);
+			this.validaCamposObrigatorios();
 			const db = firebase.database().ref(window.uid);
-			let diario = {
-				dia: "aaa",
-				gra: "bbbb",
-				data: this.diario.calendario.getTime()
-			};
-			db.push(diario);
-			
+			const id = db.push().key;
+			this.diario.id = id;
+			this.diario.calendario = this.diario.calendario.getTime();
+			db.child(id).set(this.diario, error => {
+				if(error)
+					console.log(error);
+				else
+					this.diario = {};
+			});
+		},
+		validaCamposObrigatorios() {
+			if (this.diario.inputDia && this.diario.inputDia != "") {
+				return true;
+			}
+            
+			this.errors = [];
+
+			if (!this.diario.inputDia) {
+				console.log("AAAAAAAA");
+			}
+			if (!this.age) {
+				this.errors.push("Age required.");
+			}
 		}
 	},
 };
