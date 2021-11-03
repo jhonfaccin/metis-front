@@ -8,13 +8,13 @@
 					<form class="form-inline">
 						<div class="form-group mb-2">
 							<label>Como foi seu dia?</label>
-							<textarea  v-model="diario.inputDia" class="form-control" rows="6"></textarea>
+							<textarea v-model="diario.inputDia" class="form-control" rows="6"></textarea>
 							<br />
 							<label>Pelo que você é grato(a) hoje?</label>
 							<br />
-							<textarea v-model="diario.inputGratidao" class="form-control" rows="4"></textarea>
+							<textarea v-model="diario.inputGratidao" class="form-control" rows="6"></textarea>
 							<br />
-							<v-date-picker v-model="diario.calendario" >
+							<v-date-picker v-model="diario.calendario">
 								<template v-slot="{ inputValue, inputEvents }">
 									<input class="form-control" id="calendario" :value="inputValue" v-on="inputEvents" />
 								</template>
@@ -46,21 +46,25 @@ export default {
 				inputGratidao: "",
 				calendario: new Date(),
 			}
-			
 		};
 	},
 	methods: {
 		cadastrar(){
 			this.validaCamposObrigatorios();
-			const db = firebase.database().ref(window.uid);
+			const db = firebase.database().ref(`/diarios/${window.uid}`);
 			const id = db.push().key;
 			this.diario.id = id;
 			this.diario.calendario = this.diario.calendario.getTime();
 			db.child(id).set(this.diario, error => {
-				if(error)
+				if(error){
 					console.log(error);
-				else
-					this.diario = {};
+				}
+				else {
+					this.diario.id = null;
+					this.diario.inputDia = "";
+					this.diario.inputGratidao = "";
+					this.diario.calendario = new Date();
+				}
 			});
 		},
 		validaCamposObrigatorios() {
@@ -76,7 +80,7 @@ export default {
 			if (!this.age) {
 				this.errors.push("Age required.");
 			}
-		}
+		},
 	},
 };
 </script>
@@ -84,9 +88,9 @@ export default {
 <style scoped>
 	#main {
 		padding: 10px;
-    }
-    #calendario{
-        width: 35%;
+	}
+	#calendario {
+		width: 35%;
 	}
 
 	@media (min-width: 700px) {
