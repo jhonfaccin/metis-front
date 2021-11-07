@@ -6,7 +6,7 @@
 			<span>+</span>
 		</button>
 		<div id="listaDiarios">
-			<div class="card" v-for="diario in diarios" v-bind:key="diario.calendario">
+			<div class="card" v-for="diario in diarios" v-bind:key="diario.id">
 				<div class="card-body">
 					<span>{{"Anotações do dia: "+convertDate(diario.calendario)}}</span>
 					<ul class="list-group">
@@ -26,7 +26,7 @@
 						<button type="button" class="btn btn-primary btn-sm" id="teste" v-on:click="goToAnotarDiario()">
 							<span class="fa fa-edit"></span>
 						</button>
-						<button type="button" class="btn btn-danger btn-sm" id="teste">
+						<button type="button" class="btn btn-danger btn-sm" id="teste" v-on:click="deleteAnotacao(diario)">
 							<span class="fa fa-trash"></span>
 						</button>
 					</div>
@@ -69,6 +69,14 @@ export default {
 			if (data) return new Date(data).toLocaleDateString();
 			// data = data.toLocaleDateString("en-US");
 			// return data.toLocaleTimeString(navigator.language, {hour: "2-digit", minute:"2-digit"});
+		},
+		deleteAnotacao(diario){
+			const db = firebase.database().ref(`/diarios/${window.uid}/`+diario.id);
+			db.remove().then(function(data){
+				console.log("removido com sucesso!"+data);
+			}).catch(function(error) {
+				console.log("Remove failed: " + error.message);
+			});
 		}
 	}
 };
