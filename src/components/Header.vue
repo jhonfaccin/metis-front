@@ -3,7 +3,7 @@
 		<nav class="container">
 			<img v-on:click="openMenu" alt="Abrir menu" id="menu-button" src="../assets/menu.svg" />
 			<h1>
-				<span class="text-center">Métis</span>
+				<span>Métis</span>
 			</h1>
 			<img alt="Abrir menu" id="menu-button" src="../assets/meditacao.jpg" />
 			<div v-on:click="closeMenu" id="menu-overlay" v-if="menuActive" />
@@ -52,7 +52,8 @@ export default {
 
 <style scoped>
 	h1{
-		color: #ededed;	
+        color: #ededed;	
+        text-align: left;
 	}
 	header {
 		background-color: var(--color-background-nav);
@@ -134,7 +135,7 @@ export default {
 			margin-left: 20px;
 		}
 		h1{
-			margin-left: 35%;
+			/* margin-left: 35%; */
 		}
 	}
 </style>

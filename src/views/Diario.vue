@@ -1,38 +1,41 @@
 <template>
 	<Header />
 	<div id="main">
-		<h3 class="text-center">Meu Diario</h3>
-		<button type="button" class="btn btn-primary btn-lg" v-on:click="anotarDiario()">
-			<span>+</span>
-		</button>
-		<div id="listaDiarios">
-			<div class="card" v-for="diario in diarios" v-bind:key="diario.id">
-				<div class="card-body">
-					<span>{{"Anotações do dia: "+convertDate(diario.calendario)}}</span>
-					<ul class="list-group">
-						<li class="list-group-item">
-							<div class="row">
-								<div class="col-md" v-if="diario.inputDia.length < 60">{{ diario.inputDia }}</div>
-								<div class="col-md" v-else>{{ diario.inputDia.substring(0,61)+"..." }}</div>
-							</div>
-							<br />
-							<div class="row">
-								<div class="col-md" v-if="diario.inputGratidao.length < 60">{{ diario.inputGratidao }}</div>
-								<div class="col-md" v-else>{{ diario.inputGratidao.substring(0,61)+"..." }}</div>
-							</div>
-						</li>
-					</ul>
-					<div>
-						<button type="button" class="btn btn-primary btn-sm" id="teste" v-on:click="editarDiario(diario)">
-							<span class="fa fa-edit"></span>
-						</button>
-						<button type="button" class="btn btn-danger btn-sm" id="teste" v-on:click="deleteAnotacao(diario)">
-							<span class="fa fa-trash"></span>
-						</button>
+		<div class="container">
+			<h3 class="text-center">Meu Diário</h3>
+			<button type="button" class="btn btn-primary btn-lg" v-on:click="anotarDiario()">
+				<span>+</span>
+			</button>
+			<div id="listaDiarios">
+				<div class="card col-sm-12 col-md-12" v-for="diario in diarios" v-bind:key="diario.id">
+					<div class="card-body " >
+						<span>{{"Anotações do dia: "+convertDate(diario.calendario)}}</span>
+						<ul class="list-group">
+							<li class="list-group-item">
+								<div class="row">
+									<div class="col-md" v-if="diario.inputDia.length < 60">{{ diario.inputDia }}</div>
+									<div class="col-md" v-else>{{ diario.inputDia.substring(0,61)+"..." }}</div>
+								</div>
+								<br />
+								<div class="row">
+									<div class="col-md" v-if="diario.inputGratidao.length < 60">{{ diario.inputGratidao }}</div>
+									<div class="col-md" v-else>{{ diario.inputGratidao.substring(0,61)+"..." }}</div>
+								</div>
+							</li>
+						</ul>
+						<div>
+							<button type="button" class="btn btn-primary btn-sm" id="teste" v-on:click="editarDiario(diario)">
+								<span class="fa fa-edit"></span>
+							</button>
+							<button type="button" class="btn btn-danger btn-sm" id="teste" v-on:click="deleteAnotacao(diario)">
+								<span class="fa fa-trash"></span>
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		
 	</div>
 </template>
 
@@ -95,7 +98,7 @@ export default {
 		padding: 10px;
 	}
 	#listaDiarios {
-		padding: 10px;
+		padding-top: 10px;
 	}
 	.card {
 		position: unset;
