@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import About from "../views/About.vue";
 import Diario from "../views/Diario.vue";
 import CadastraDiario from "../views/DiarioCadastrar.vue";
+import EditarDiario from "../views/EditarDiario.vue";
 import Login from "../views/Login.vue";
 
 const routes = [
@@ -34,6 +35,11 @@ const routes = [
 		path: "/cadastrarDiario",
 		name: "cadastrarDiario",
 		component: CadastraDiario
+	},
+	{
+		path: "/editarDiario/:id",
+		name: "editarDiario",
+		component: EditarDiario
 	}
 ];
 

@@ -20,7 +20,7 @@
 								</template>
 							</v-date-picker>
 						</div>
-						<button v-on:click="cadastrar()" type="submit" class="btn btn-primary mb-2">Salvar</button>
+						<button v-on:click="editar()" type="submit" class="btn btn-primary mb-2">Salvar</button>
 					</form>
 				</div>
 			</div>
@@ -30,9 +30,7 @@
 
 <script>
 import Header from "@/components/Header.vue";
-// import api from "../services/api.js";
 import firebase from "firebase";
-
 
 export default {
 	name: "Home",
@@ -41,48 +39,41 @@ export default {
 	},
 	data() {
 		return {
-			diario:{
+			diario: {
 				inputDia: "",
 				inputGratidao: "",
-				calendario: new Date(),
+				// calendario: new Date()
 			}
 		};
 	},
+	
+	mounted() {
+		this.getDiario();
+	},
+
 	methods: {
-		cadastrar(){
-			this.validaCamposObrigatorios();
+		getDiario() {
+			const id = this.$route.params.id;
+			const db = firebase.database().ref(`/diarios/${window.uid}/${id}`);
+			db.on("value", data => {
+				this.diario = data.val();
+				this.diario.calendario = new Date(this.diario.calendario); 
+			});
+		},
+		editar(){
 			const db = firebase.database().ref(`/diarios/${window.uid}`);
-			const id = db.push().key;
-			this.diario.id = id;
 			this.diario.calendario = this.diario.calendario.getTime();
-			db.child(id).set(this.diario, error => {
+			db.child(this.diario.id).set(this.diario, error => {
+				debugger;
 				if(error){
 					console.log(error);
 				}
 				else {
-					// this.diario.id = null;
-					// this.diario.inputDia = "";
-					// this.diario.inputGratidao = "";
-					// this.diario.calendario = new Date();
 					this.$router.push("/diario");
 				}
 			});
-		},
-		validaCamposObrigatorios() {
-			if (this.diario.inputDia && this.diario.inputDia != "") {
-				return true;
-			}
-            
-			this.errors = [];
-
-			if (!this.diario.inputDia) {
-				console.log("AAAAAAAA");
-			}
-			if (!this.age) {
-				this.errors.push("Age required.");
-			}
-		},
-	},
+		}
+	}
 };
 </script>
 

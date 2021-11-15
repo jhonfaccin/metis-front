@@ -2,7 +2,7 @@
 	<Header />
 	<div id="main">
 		<h3 class="text-center">Meu Diario</h3>
-		<button type="button" class="btn btn-primary btn-lg" v-on:click="goToAnotarDiario()">
+		<button type="button" class="btn btn-primary btn-lg" v-on:click="anotarDiario()">
 			<span>+</span>
 		</button>
 		<div id="listaDiarios">
@@ -17,13 +17,13 @@
 							</div>
 							<br />
 							<div class="row">
-								<div class="col-md" v-if="diario.inputGratidao.length < 60">{{ diario.inputDia }}</div>
+								<div class="col-md" v-if="diario.inputGratidao.length < 60">{{ diario.inputGratidao }}</div>
 								<div class="col-md" v-else>{{ diario.inputGratidao.substring(0,61)+"..." }}</div>
 							</div>
 						</li>
 					</ul>
 					<div>
-						<button type="button" class="btn btn-primary btn-sm" id="teste" v-on:click="goToAnotarDiario()">
+						<button type="button" class="btn btn-primary btn-sm" id="teste" v-on:click="editarDiario(diario)">
 							<span class="fa fa-edit"></span>
 						</button>
 						<button type="button" class="btn btn-danger btn-sm" id="teste" v-on:click="deleteAnotacao(diario)">
@@ -54,9 +54,17 @@ export default {
 		this.listarDiarios();
 	},
 	methods: {
-		goToAnotarDiario() {
-			console.log(this.window);
+		anotarDiario() {
 			this.$router.push("/cadastrarDiario");
+		},
+		editarDiario(diario){
+			this.$router.push(`/editarDiario/${diario.id}`);
+			// this.$router.push({
+			// 	name: "editarDiario",
+			// 	params: {
+			// 		diario
+			// 	}
+			// });
 		},
 		listarDiarios() {
 			const db = firebase.database().ref(`/diarios/${window.uid}`);
