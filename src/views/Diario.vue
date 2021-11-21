@@ -13,21 +13,23 @@
 						<ul class="list-group">
 							<li class="list-group-item">
 								<div class="row">
-									<div class="col-md" v-if="diario.inputDia.length < 60">{{ diario.inputDia }}</div>
-									<div class="col-md" v-else>{{ diario.inputDia.substring(0,61)+"..." }}</div>
+                                    <div class="col-md">{{ diario.inputDia }}</div>
+									<!-- <div class="col-md" v-if="diario.inputDia.length < 60">{{ diario.inputDia }}</div>
+									<div class="col-md" v-else>{{ diario.inputDia.substring(0,61)+"..." }}</div> -->
 								</div>
 								<br />
 								<div class="row">
-									<div class="col-md" v-if="diario.inputGratidao.length < 60">{{ diario.inputGratidao }}</div>
-									<div class="col-md" v-else>{{ diario.inputGratidao.substring(0,61)+"..." }}</div>
+                                    <div class="col-md">{{ diario.inputGratidao }}</div>
+									<!-- <div class="col-md" v-if="diario.inputGratidao.length < 60">{{ diario.inputGratidao }}</div>
+									<div class="col-md" v-else>{{ diario.inputGratidao.substring(0,61)+"..." }}</div> -->
 								</div>
 							</li>
 						</ul>
 						<div>
-							<button type="button" class="btn btn-primary btn-sm" id="teste" v-on:click="editarDiario(diario)">
+							<button type="button" class="btn btn-primary btn-sm" id="tamanhoBotao" v-on:click="editarDiario(diario)">
 								<span class="fa fa-edit"></span>
 							</button>
-							<button type="button" class="btn btn-danger btn-sm" id="teste" v-on:click="deleteAnotacao(diario)">
+							<button type="button" class="btn btn-danger btn-sm" id="tamanhoBotao" v-on:click="deleteAnotacao(diario)">
 								<span class="fa fa-trash"></span>
 							</button>
 						</div>
@@ -62,12 +64,6 @@ export default {
 		},
 		editarDiario(diario){
 			this.$router.push(`/editarDiario/${diario.id}`);
-			// this.$router.push({
-			// 	name: "editarDiario",
-			// 	params: {
-			// 		diario
-			// 	}
-			// });
 		},
 		listarDiarios() {
 			const db = firebase.database().ref(`/diarios/${window.uid}`);
@@ -101,13 +97,25 @@ export default {
 		padding-top: 10px;
 	}
 	.card {
-		position: unset;
+        /* position: unset; */
+        
 	}
 	.list-group-item {
-		position: unset;
-	}
-	#teste {
+        /* position: unset; */
+        max-height: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+                line-clamp: 2; 
+        -webkit-box-orient: vertical;
+    }
+	#tamanhoBotao {
 		/* display: block; */
 		width: 50%;
-	}
+    }
+    
+    .text {
+        
+}
 </style>
