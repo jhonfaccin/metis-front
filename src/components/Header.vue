@@ -19,7 +19,7 @@
 						<router-link to="/about">Sobre</router-link>
 					</li>
 					<li>
-						<router-link to="/about">About</router-link>
+						<router-link to="/meditacao">Meditação</router-link>
 					</li>
 					<li>
 						<router-link to="/about">About</router-link>
@@ -68,7 +68,7 @@ export default {
 		display: flex;
 		justify-content: space-between;
 		height: 60px;
-		align-items: center;
+        align-items: center;
 	}
 
 	#menu {
@@ -84,6 +84,7 @@ export default {
 		width: 40%;
 		height: 100vh;
         background-color: #000000;
+        z-index: 1;
 		opacity: 0.8;
 	}
 	#menu-items {
@@ -95,7 +96,8 @@ export default {
 		background-color: var(--color-background-nav);
 		width: 60%;
 		height: 100vh;
-		align-items: center;
+        align-items: center;
+        z-index: 1;
 	}
 	#menu-items.active{
 		display: flex;
