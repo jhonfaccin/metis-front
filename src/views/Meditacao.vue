@@ -84,5 +84,15 @@ export default {
 			width: 250px;
 			height: 54px;
 		}
+		.container {
+			width:98%;
+		}
 	}
+	
+	/* @media  (min-width: 800px) {
+		.container {
+			width:1100px;
+		}
+	} */
+	
 </style>

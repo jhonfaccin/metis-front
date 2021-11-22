@@ -42,10 +42,20 @@ a:hover{
     opacity: 0.8;
 }
 
-.container{
-    width: 95%
-}
+/* .container{
+    width: 95%;
+} */
 
 .btn-primary{
     background-color: #46B0A3 !important;
+}
+
+.btn-danger{
+    background-color: rgba(255, 35, 35, 0.582) !important;
+}
+
+@media  (min-width: 800px) {
+    .container {
+        width:1100px;
+    }
 }

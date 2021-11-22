@@ -2,17 +2,17 @@
 	<Header />
 	<div id="main">
 		<div class="container">
-			<h3 class="text-left">Inserir o registro diario</h3>
+			<h3 class="text-center">Inserir o registro diario</h3>
 			<div class="row">
-				<div class="col-md-8">
+				<div class="col-md-12">
 					<form class="form-inline">
 						<div class="form-group mb-2">
 							<label>Como foi seu dia?</label>
-							<textarea v-model="diario.inputDia" class="form-control" rows="6"></textarea>
+							<textarea v-model="diario.inputDia" class="form-control" rows="8"></textarea>
 							<br />
 							<label>Pelo que você é grato(a) hoje?</label>
 							<br />
-							<textarea v-model="diario.inputGratidao" class="form-control" rows="6"></textarea>
+							<textarea v-model="diario.inputGratidao" class="form-control" rows="8"></textarea>
 							<br />
 							<v-date-picker v-model="diario.calendario">
 								<template v-slot="{ inputValue, inputEvents }">

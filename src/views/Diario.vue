@@ -97,11 +97,9 @@ export default {
 		padding-top: 10px;
 	}
 	.card {
-        /* position: unset; */
-        
+       margin-bottom: 10px;
 	}
 	.list-group-item {
-        /* position: unset; */
         max-height: 150px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -112,10 +110,8 @@ export default {
     }
 	#tamanhoBotao {
 		/* display: block; */
-		width: 50%;
+        width: 50%;
+        margin-top: 5px;
     }
-    
-    .text {
         
-}
 </style>
