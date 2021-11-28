@@ -6,6 +6,7 @@ import CadastraDiario from "../views/DiarioCadastrar.vue";
 import EditarDiario from "../views/EditarDiario.vue";
 import Login from "../views/Login.vue";
 import Meditacao from "../views/Meditacao.vue";
+import Leitura from "../views/Leitura.vue";
 
 const routes = [
 	{
@@ -46,7 +47,13 @@ const routes = [
 		path: "/meditacao",
 		name: "meditacao",
 		component: Meditacao	
+	},
+	{
+		path: "/leitura/:id",
+		name: "leitura",
+		component: Leitura
 	}
+	
 ];
 
 

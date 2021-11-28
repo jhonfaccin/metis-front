@@ -14,14 +14,10 @@
 							<li class="list-group-item">
 								<div class="row">
                                     <div class="col-md">{{ diario.inputDia }}</div>
-									<!-- <div class="col-md" v-if="diario.inputDia.length < 60">{{ diario.inputDia }}</div>
-									<div class="col-md" v-else>{{ diario.inputDia.substring(0,61)+"..." }}</div> -->
 								</div>
 								<br />
 								<div class="row">
                                     <div class="col-md">{{ diario.inputGratidao }}</div>
-									<!-- <div class="col-md" v-if="diario.inputGratidao.length < 60">{{ diario.inputGratidao }}</div>
-									<div class="col-md" v-else>{{ diario.inputGratidao.substring(0,61)+"..." }}</div> -->
 								</div>
 							</li>
 						</ul>
@@ -109,8 +105,9 @@ export default {
         -webkit-box-orient: vertical;
     }
 	#tamanhoBotao {
-		/* display: block; */
-        width: 50%;
+        /* width: 50%; */
+        width:  85px;
+        margin-right: 4px;
         margin-top: 5px;
     }
         
