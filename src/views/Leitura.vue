@@ -6,6 +6,13 @@
 			<div>
 				<p>{{leitura.texto}}</p>
 			</div>
+			<div class="card" >
+                    <div class="card-body">
+                        <h5 class="card-title">{{leitura.titulo}}</h5>
+                        <p class="card-text">{{leitura.texto}}</p>
+                    </div>
+                </div>
+			
 		</div>
 	</div>
 </template>

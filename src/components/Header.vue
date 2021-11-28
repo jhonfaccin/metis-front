@@ -21,9 +21,9 @@
 					<li>
 						<router-link to="/meditacao">Meditação</router-link>
 					</li>
-					<li>
+					<!-- <li>
 						<router-link to="/about">About</router-link>
-					</li>
+					</li> -->
 					
 				</ul>
 			</div>

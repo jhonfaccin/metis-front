@@ -8,7 +8,8 @@
 		<div class="container">
 			<div class="card">
 				<div class="card-body text-center">
-					<p>Semana 1</p>
+                    <h5>Primeira semana</h5>
+					<p>Esta Meditação deve ser realizada todos os dias durante uma semana</p>
 					<audio controls class="audio">
 						<source src="horse.ogg" type="audio/ogg" />
 						<source src="../assets/musica/agua.mp3" type="audio/mpeg" />Your browser does not support the audio element.
@@ -17,7 +18,8 @@
 			</div>
 			<div class="card">
 				<div class="card-body text-center">
-					<p>Semana 2</p>
+					<h5>Segunda semana</h5>
+					<p>Esta Meditação deve ser realizada todos os dias durante uma semana</p>
 					<audio controls class="audio">
 						<source src="horse.ogg" type="audio/ogg" />
 						<source src="../assets/musica/SEGUNDA_SEMANA.mp3" type="audio/mpeg" />Your browser does not support the audio element.
@@ -26,7 +28,8 @@
 			</div>
 			<div class="card">
 				<div class="card-body text-center">
-					<p>Semana 3</p>
+					<h5>Terceira semana</h5>
+					<p>Esta Meditação deve ser realizada todos os dias durante uma semana</p>
 					<audio controls class="audio">
 						<source src="horse.ogg" type="audio/ogg" />
 						<source src="../assets/musica/TERCEIRA_SEMANA.mp3" type="audio/mpeg" />Your browser does not support the audio element.
@@ -35,7 +38,8 @@
 			</div>
 			<div class="card">
 				<div class="card-body text-center">
-					<p>Semana 4</p>
+					<h5>Quarta semana</h5>
+					<p>Esta Meditação deve ser realizada todos os dias durante uma semana</p>
 					<audio controls class="audio">
 						<source src="horse.ogg" type="audio/ogg" />
 						<source src="../assets/musica/QUARTA_SEMANA.mp3" type="audio/mpeg" />Your browser does not support the audio element.
