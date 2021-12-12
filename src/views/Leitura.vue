@@ -3,16 +3,15 @@
 	<div id="main">
 		<div class="container">
 			<h3 class="text-center">{{leitura.titulo}}</h3>
-			<div>
-				<p>{{leitura.texto}}</p>
-			</div>
 			<div class="card" >
                     <div class="card-body">
                         <h5 class="card-title">{{leitura.titulo}}</h5>
                         <p class="card-text">{{leitura.texto}}</p>
+						<button type="button" class="btn btn-primary" v-on:click="marcarComoLido(true)">
+								<span>Marcar como lido</span>
+						</button>
                     </div>
-                </div>
-			
+            </div>
 		</div>
 	</div>
 </template>
@@ -42,7 +41,18 @@ export default {
 			const db = firebase.database().ref(`/textos/${id}`);
 			db.on("value", data => {
 				this.leitura = data.val();
-				console.log(this.leitura);
+			});
+		},
+		marcarComoLido(status){
+			const id = this.$route.params.id;
+			const db = firebase.database().ref(`/textos/${id}`);
+			this.leitura.status = status;
+			db.set(this.leitura, error => {
+				debugger;
+				if(error)
+					console.log(error);
+				else 
+					this.$router.push("/home");
 			});
 		}
 	}
