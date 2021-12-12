@@ -1,25 +1,25 @@
 <template>
 	<Header />
 	<div class="container">
-		<!-- <div class="card position-absolute top-50 start-50 translate-middle"> -->
 		<div class="Absolute-Center is-Responsive">
-			<h4 class="textalert alert-danger" v-if="exibeMensagem">{{mensagemErro}}</h4>
-			<div>
+			<div v-show="isLogin">
+				<h4 class="textalert alert-danger" v-if="exibeMensagem">{{mensagemErro}}</h4>
 				<div class="mb-3">
 					<input type="email" class="form-control" placeholder="Email" required v-model="usuario.email" />
 				</div>
 				<div class="mb-3">
-					<input
-						class="form-control"
-						type="password"
-						placeholder="senha"
-						required
-						v-model="usuario.password"
-					/>
+					<input class="form-control" type="password" placeholder="senha" required v-model="usuario.password"/>
 				</div>
 				<div class="d-grid gap-2">
 					<button v-on:click="acessar()" type="button" class="btn btn-primary">Acessar</button>
 				</div>
+				<div id="cadastro">
+					<a href="#" v-on:click="cadastrarUsuario(false)">Cadastrar usuário</a>
+				</div>
+			</div>
+			<div v-show="!isLogin">
+				<a href="#" v-on:click="cadastrarUsuario(true)">Fazer Login</a>
+				<CadastroUsuarioComponent />
 			</div>
 		</div>
 	</div>
@@ -27,17 +27,20 @@
 
 <script>
 import Header from "@/components/Header.vue";
+import CadastroUsuarioComponent from "@/components/CadastroUsuarioComponent.vue";
 import firebase from "firebase";
 
 export default {
 	nome: "Login",
 	components: {
-		Header
+		Header,
+		CadastroUsuarioComponent
 	},
 	data() {
 		return {
 			mensagemErro:"Email ou senha inválidos!",
 			exibeMensagem: false,
+			isLogin: true,
 			usuario: {
 				email: "",
 				password: ""
@@ -52,9 +55,11 @@ export default {
 				this.$router.push("/home");
 			}).catch(erro => {
 				this.exibeMensagem = true;
-				console.log("AAAAAAAAAA");
 				console.log(erro);
 			});
+		},
+		cadastrarUsuario(login){
+			this.isLogin = login;
 		}
 	},
 	beforeRouteEnter (to, from, next) {
@@ -87,4 +92,8 @@ export default {
 	max-width: 400px;
 	padding: 40px;
 }
+#cadastro{
+    padding-top: 5px;
+}
+
 </style>
