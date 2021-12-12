@@ -21,9 +21,9 @@
 					<li>
 						<router-link to="/meditacao">Meditação</router-link>
 					</li>
-					<!-- <li>
-						<router-link to="/about">About</router-link>
-					</li> -->
+					<li>
+						<a href="#" v-on:click="sair()">Sair</a>
+					</li>
 					
 				</ul>
 			</div>
@@ -32,7 +32,10 @@
 </template>
 
 <script>
+import firebase from "firebase";
+
 export default {
+	
 	nome: "Header",
 	data() {
 		return {
@@ -45,6 +48,9 @@ export default {
 		},
 		closeMenu: function(){
 			this.menuActive = false;
+		},
+		sair: function() {
+			firebase.auth().signOut();
 		}
 	},
 };
