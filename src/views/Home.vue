@@ -42,7 +42,6 @@ export default {
 			const db = firebase.database().ref("/textos/");
 			db.on("value", data => {
 				const values = data.val();
-				console.log(values);
 				this.textos = Object.keys(values).map(i => values[i]);
 				console.log(this.textos);
 			});
