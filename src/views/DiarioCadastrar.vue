@@ -3,6 +3,7 @@
 	<div id="main">
 		<div class="container">
 			<h3 class="text-center">Inserir o registro diario</h3>
+			<h4 class="textalert alert-danger" id="alert" v-if="exibeMensagem">{{mensagemErro}}</h4>
 			<div class="row">
 				<div class="col-md-12">
 					<form class="form-inline">
@@ -41,6 +42,8 @@ export default {
 	},
 	data() {
 		return {
+			mensagemErro: "Responda uma das perguntas abaixo",
+			exibeMensagem: false,
 			diario:{
 				inputDia: "",
 				inputGratidao: "",
@@ -50,36 +53,33 @@ export default {
 	},
 	methods: {
 		cadastrar(){
-			this.validaCamposObrigatorios();
-			const db = firebase.database().ref(`/diarios/${window.uid}`);
-			const id = db.push().key;
-			this.diario.id = id;
-			this.diario.calendario = this.diario.calendario.getTime();
-			db.child(id).set(this.diario, error => {
-				if(error){
-					console.log(error);
-				}
-				else {
-					// this.diario.id = null;
-					// this.diario.inputDia = "";
-					// this.diario.inputGratidao = "";
-					// this.diario.calendario = new Date();
-					this.$router.push("/diario");
-				}
-			});
+			let permiteCadastrar = this.validaCamposObrigatorios();
+			if (permiteCadastrar){
+				const db = firebase.database().ref(`/diarios/${window.uid}`);
+				const id = db.push().key;
+				this.diario.id = id;
+				this.diario.calendario = this.diario.calendario.getTime();
+				db.child(id).set(this.diario, error => {
+					if(error){
+						console.log(error);
+					}
+					else {
+						// this.diario.id = null;
+						// this.diario.inputDia = "";
+						// this.diario.inputGratidao = "";
+						// this.diario.calendario = new Date();
+						this.$router.push("/diario");
+					}
+				});
+			} else{
+				this.exibeMensagem = true;
+				setTimeout(() => this.exibeMensagem = false, 2000);
+			}
 		},
 		validaCamposObrigatorios() {
-			if (this.diario.inputDia && this.diario.inputDia != "") {
-				return true;
-			}
-            
-			this.errors = [];
-
-			if (!this.diario.inputDia) {
-				console.log("AAAAAAAA");
-			}
-			if (!this.age) {
-				this.errors.push("Age required.");
+			if ((this.diario.inputDia && this.diario.inputDia != "") ||
+				(this.diario.inputGratidao && this.diario.inputGratidao != "")) {
+				return false;
 			}
 		},
 	},
