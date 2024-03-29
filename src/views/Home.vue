@@ -22,7 +22,6 @@
 
 <script>
 import Header from "@/components/Header.vue";
-import firebase from "firebase";
 
 export default {
 	name: "Home",
@@ -39,12 +38,12 @@ export default {
 	},
 	methods: {
 		listarTextos() {
-			const db = firebase.database().ref("/textos/");
-			db.on("value", data => {
-				const values = data.val();
-				this.textos = Object.keys(values).map(i => values[i]);
-				console.log(this.textos);
-			});
+			// const db = firebase.database().ref("/textos/");
+			// db.on("value", data => {
+			// 	const values = data.val();
+			// 	this.textos = Object.keys(values).map(i => values[i]);
+			// 	console.log(this.textos);
+			// });
 		},
 		lerMais(texto){
 			this.$router.push(`/leitura/${texto.id}`);

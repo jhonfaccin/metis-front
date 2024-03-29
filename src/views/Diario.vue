@@ -39,7 +39,6 @@
 
 <script>
 import Header from "@/components/Header.vue";
-import firebase from "firebase";
 
 export default {
 	name: "Diario",
@@ -62,11 +61,11 @@ export default {
 			this.$router.push(`/editarDiario/${diario.id}`);
 		},
 		listarDiarios() {
-			const db = firebase.database().ref(`/diarios/${window.uid}`);
-			db.on("value", data => {
-				const values = data.val();
-				this.diarios = Object.keys(values).map(i => values[i]);
-			});
+			// const db = firebase.database().ref(`/diarios/${window.uid}`);
+			// db.on("value", data => {
+			// 	const values = data.val();
+			// 	this.diarios = Object.keys(values).map(i => values[i]);
+			// });
 		},
 		convertDate(data) {
 			if (data) return new Date(data).toLocaleDateString();
@@ -74,12 +73,12 @@ export default {
 			// return data.toLocaleTimeString(navigator.language, {hour: "2-digit", minute:"2-digit"});
 		},
 		deleteAnotacao(diario){
-			const db = firebase.database().ref(`/diarios/${window.uid}/`+diario.id);
-			db.remove().then(function(data){
-				console.log("removido com sucesso!"+data);
-			}).catch(function(error) {
-				console.log("Remove failed: " + error.message);
-			});
+			// const db = firebase.database().ref(`/diarios/${window.uid}/`+diario.id);
+			// db.remove().then(function(data){
+			// 	console.log("removido com sucesso!"+data);
+			// }).catch(function(error) {
+			// 	console.log("Remove failed: " + error.message);
+			// });
 		}
 	}
 };

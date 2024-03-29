@@ -30,7 +30,6 @@
 
 <script>
 import Header from "@/components/Header.vue";
-import firebase from "firebase";
 
 export default {
 	name: "Home",
@@ -54,24 +53,24 @@ export default {
 	methods: {
 		getDiario() {
 			const id = this.$route.params.id;
-			const db = firebase.database().ref(`/diarios/${window.uid}/${id}`);
-			db.on("value", data => {
-				this.diario = data.val();
-				this.diario.calendario = new Date(this.diario.calendario); 
-			});
+			// const db = firebase.database().ref(`/diarios/${window.uid}/${id}`);
+			// db.on("value", data => {
+			// 	this.diario = data.val();
+			// 	this.diario.calendario = new Date(this.diario.calendario); 
+			// });
 		},
 		editar(){
-			const db = firebase.database().ref(`/diarios/${window.uid}`);
+			// const db = firebase.database().ref(`/diarios/${window.uid}`);
 			this.diario.calendario = this.diario.calendario.getTime();
-			db.child(this.diario.id).set(this.diario, error => {
-				debugger;
-				if(error){
-					console.log(error);
-				}
-				else {
-					this.$router.push("/diario");
-				}
-			});
+			// db.child(this.diario.id).set(this.diario, error => {
+			// 	debugger;
+			// 	if(error){
+			// 		console.log(error);
+			// 	}
+			// 	else {
+			// 		this.$router.push("/diario");
+			// 	}
+			// });
 		}
 	}
 };
