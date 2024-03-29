@@ -31,7 +31,6 @@
 <script>
 import Header from "@/components/Header.vue";
 // import api from "../services/api.js";
-import firebase from "firebase";
 
 
 export default {
@@ -51,22 +50,22 @@ export default {
 	methods: {
 		cadastrar(){
 			this.validaCamposObrigatorios();
-			const db = firebase.database().ref(`/diarios/${window.uid}`);
-			const id = db.push().key;
+			// const db = firebase.database().ref(`/diarios/${window.uid}`);
+			// const id = db.push().key;
 			this.diario.id = id;
 			this.diario.calendario = this.diario.calendario.getTime();
-			db.child(id).set(this.diario, error => {
-				if(error){
-					console.log(error);
-				}
-				else {
-					// this.diario.id = null;
-					// this.diario.inputDia = "";
-					// this.diario.inputGratidao = "";
-					// this.diario.calendario = new Date();
-					this.$router.push("/diario");
-				}
-			});
+			// db.child(id).set(this.diario, error => {
+			// 	if(error){
+			// 		console.log(error);
+			// 	}
+			// 	else {
+			// 		// this.diario.id = null;
+			// 		// this.diario.inputDia = "";
+			// 		// this.diario.inputGratidao = "";
+			// 		// this.diario.calendario = new Date();
+			// 		this.$router.push("/diario");
+			// 	}
+			// });
 		},
 		validaCamposObrigatorios() {
 			if (this.diario.inputDia && this.diario.inputDia != "") {

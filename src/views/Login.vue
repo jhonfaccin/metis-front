@@ -28,7 +28,6 @@
 <script>
 import Header from "@/components/Header.vue";
 import CadastroUsuarioComponent from "@/components/CadastroUsuarioComponent.vue";
-import firebase from "firebase";
 
 export default {
 	nome: "Login",
@@ -50,25 +49,19 @@ export default {
 	methods: {
 		acessar() {
 			this.exibeMensagem = false;
-			firebase.auth().signInWithEmailAndPassword(this.usuario.email,this.usuario.password).then(response => {
-				window.uid = response.user.uid;
-				this.$router.push("/home");
-			}).catch(erro => {
-				this.exibeMensagem = true;
-				console.log(erro);
-			});
+			this.$router.push("/home");
 		},
 		cadastrarUsuario(login){
 			this.isLogin = login;
 		}
 	},
-	beforeRouteEnter (to, from, next) {
-		next(vm => {
-			if(window.uid){
-				vm.$router.push({name: "Home"});
-			}
-		});
-	}
+	// beforeRouteEnter (to, from, next) {
+	// 	next(vm => {
+	// 		if(window.uid){
+	// 			vm.$router.push({name: "Home"});
+	// 		}
+	// 	});
+	// }
 };
 </script>
 

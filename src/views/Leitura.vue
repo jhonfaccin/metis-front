@@ -18,7 +18,6 @@
 
 <script>
 import Header from "@/components/Header.vue";
-import firebase from "firebase";
 
 export default {
 	name: "Leitura",
@@ -38,22 +37,22 @@ export default {
 	methods: {
 		getTextoById() {
 			const id = this.$route.params.id;
-			const db = firebase.database().ref(`/textos/${id}`);
-			db.on("value", data => {
-				this.leitura = data.val();
-			});
+			// const db = firebase.database().ref(`/textos/${id}`);
+			// db.on("value", data => {
+			// 	this.leitura = data.val();
+			// });
 		},
 		marcarComoLido(status){
 			const id = this.$route.params.id;
-			const db = firebase.database().ref(`/textos/${id}`);
+			// const db = firebase.database().ref(`/textos/${id}`);
 			this.leitura.status = status;
-			db.set(this.leitura, error => {
-				debugger;
-				if(error)
-					console.log(error);
-				else 
-					this.$router.push("/home");
-			});
+			// db.set(this.leitura, error => {
+			// 	debugger;
+			// 	if(error)
+			// 		console.log(error);
+			// 	else 
+			// 		this.$router.push("/home");
+			// });
 		}
 	}
 };

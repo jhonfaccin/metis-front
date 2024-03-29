@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import firebase from "firebase";
 
 export default {
 	
@@ -50,7 +49,7 @@ export default {
 			this.menuActive = false;
 		},
 		sair: function() {
-			firebase.auth().signOut();
+			// firebase.auth().signOut();
 		}
 	},
 };
