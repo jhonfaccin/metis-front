@@ -1,7 +1,10 @@
 import axios from "axios";
 
 const api = axios.create({
-	baseURL: "https://metis-back-default-rtdb.firebaseio.com",
+	baseURL: "http://localhost:9000/metis",
+	headers: {
+		'Content-Type': 'application/json'
+	  }
 });
 
 export default api;

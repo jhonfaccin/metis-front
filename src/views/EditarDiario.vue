@@ -8,13 +8,13 @@
 					<form class="form-inline">
 						<div class="form-group mb-2">
 							<label>Como foi seu dia?</label>
-							<textarea v-model="diario.inputDia" class="form-control" rows="8"></textarea>
+							<textarea v-model="diary.dayReport" class="form-control" rows="8"></textarea>
 							<br />
 							<label>Pelo que você é grato(a) hoje?</label>
 							<br />
-							<textarea v-model="diario.inputGratidao" class="form-control" rows="8"></textarea>
+							<textarea v-model="diary.gratitude" class="form-control" rows="8"></textarea>
 							<br />
-							<v-date-picker v-model="diario.calendario">
+							<v-date-picker v-model="diary.dayRegister" locale="pt-BR">
 								<template v-slot="{ inputValue, inputEvents }">
 									<input class="form-control" id="calendario" :value="inputValue" v-on="inputEvents" />
 								</template>
@@ -30,6 +30,7 @@
 
 <script>
 import Header from "@/components/Header.vue";
+import diaryService from "../services/diaryService";
 
 export default {
 	name: "Home",
@@ -38,11 +39,7 @@ export default {
 	},
 	data() {
 		return {
-			diario: {
-				inputDia: "",
-				inputGratidao: "",
-				// calendario: new Date()
-			}
+			diary: {}
 		};
 	},
 	
@@ -53,24 +50,19 @@ export default {
 	methods: {
 		getDiario() {
 			const id = this.$route.params.id;
-			// const db = firebase.database().ref(`/diarios/${window.uid}/${id}`);
-			// db.on("value", data => {
-			// 	this.diario = data.val();
-			// 	this.diario.calendario = new Date(this.diario.calendario); 
-			// });
+			diaryService.getDiary(id).then(response => {
+				this.diary = response.data;
+			}).catch(error => {
+				console.error(error);
+			});;
 		},
 		editar(){
-			// const db = firebase.database().ref(`/diarios/${window.uid}`);
-			this.diario.calendario = this.diario.calendario.getTime();
-			// db.child(this.diario.id).set(this.diario, error => {
-			// 	debugger;
-			// 	if(error){
-			// 		console.log(error);
-			// 	}
-			// 	else {
-			// 		this.$router.push("/diario");
-			// 	}
-			// });
+			diaryService.updateDiary(this.diary).then(response => {
+				this.$router.push("/diario");
+			}).catch(error => {
+				console.error(error);
+			});;
+
 		}
 	}
 };
@@ -83,7 +75,6 @@ export default {
 	#calendario {
 		width: 35%;
 	}
-
 	@media (min-width: 700px) {
 	}
 </style>

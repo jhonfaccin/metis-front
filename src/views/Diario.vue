@@ -7,25 +7,25 @@
 				<span>+</span>
 			</button>
 			<div id="listaDiarios">
-				<div class="card col-sm-12 col-md-12" v-for="diario in diarios" v-bind:key="diario.id">
+				<div class="card col-sm-12 col-md-12" v-for="diary in diaries" v-bind:key="diary.id">
 					<div class="card-body " >
-						<span>{{"Anotações do dia: "+convertDate(diario.calendario)}}</span>
+						<span>{{"Anotações do dia: "+convertDate(diary.dayRegister)}}</span>
 						<ul class="list-group">
 							<li class="list-group-item">
 								<div class="row">
-                                    <div class="col-md">{{ diario.inputDia }}</div>
+                                    <div class="col-md">{{ diary.dayReport }}</div>
 								</div>
 								<br />
 								<div class="row">
-                                    <div class="col-md">{{ diario.inputGratidao }}</div>
+                                    <div class="col-md">{{ diary.gratitude }}</div>
 								</div>
 							</li>
 						</ul>
 						<div>
-							<button type="button" class="btn btn-primary btn-sm" id="tamanhoBotao" v-on:click="editarDiario(diario)">
+							<button type="button" class="btn btn-primary btn-sm" id="tamanhoBotao" v-on:click="editarDiario(diary)">
 								<span class="fa fa-edit"></span>
 							</button>
-							<button type="button" class="btn btn-danger btn-sm" id="tamanhoBotao" v-on:click="deleteAnotacao(diario)">
+							<button type="button" class="btn btn-danger btn-sm" id="tamanhoBotao" v-on:click="deleteDiary(diary)">
 								<span class="fa fa-trash"></span>
 							</button>
 						</div>
@@ -39,6 +39,7 @@
 
 <script>
 import Header from "@/components/Header.vue";
+import diaryService from "../services/diaryService";
 
 export default {
 	name: "Diario",
@@ -47,38 +48,35 @@ export default {
 	},
 	data() {
 		return {
-			diarios: []
+			diaries: []
 		};
 	},
 	created() {
-		this.listarDiarios();
+		this.listDiaries();
 	},
 	methods: {
 		anotarDiario() {
 			this.$router.push("/cadastrarDiario");
 		},
-		editarDiario(diario){
-			this.$router.push(`/editarDiario/${diario.id}`);
+		editarDiario(diary){
+			this.$router.push(`/editarDiario/${diary.id}`);
 		},
-		listarDiarios() {
-			// const db = firebase.database().ref(`/diarios/${window.uid}`);
-			// db.on("value", data => {
-			// 	const values = data.val();
-			// 	this.diarios = Object.keys(values).map(i => values[i]);
-			// });
+		listDiaries() {
+			diaryService.getDiaries().then(response => {
+				this.diaries = response.data;
+			}).catch(error => {
+				console.error(error);
+			});
 		},
-		convertDate(data) {
-			if (data) return new Date(data).toLocaleDateString();
-			// data = data.toLocaleDateString("en-US");
-			// return data.toLocaleTimeString(navigator.language, {hour: "2-digit", minute:"2-digit"});
+		convertDate(date) {
+			if (date) return new Date(date).toLocaleDateString('pt-BR');
 		},
-		deleteAnotacao(diario){
-			// const db = firebase.database().ref(`/diarios/${window.uid}/`+diario.id);
-			// db.remove().then(function(data){
-			// 	console.log("removido com sucesso!"+data);
-			// }).catch(function(error) {
-			// 	console.log("Remove failed: " + error.message);
-			// });
+		deleteDiary(diary){
+			diaryService.deleteDiary(diary.id).then(response => {
+				this.listDiaries();
+			}).catch(error => {
+				console.error(error);
+			});
 		}
 	}
 };

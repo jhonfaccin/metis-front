@@ -8,19 +8,20 @@
 					<form class="form-inline">
 						<div class="form-group mb-2">
 							<label>Como foi seu dia?</label>
-							<textarea v-model="diario.inputDia" class="form-control" rows="8"></textarea>
+							<textarea v-model="diary.dayReport" class="form-control" rows="8"></textarea>
 							<br />
 							<label>Pelo que você é grato(a) hoje?</label>
 							<br />
-							<textarea v-model="diario.inputGratidao" class="form-control" rows="8"></textarea>
+							<textarea v-model="diary.gratitude" class="form-control" rows="8"></textarea>
 							<br />
-							<v-date-picker v-model="diario.calendario">
+							<v-date-picker v-model="diary.dayRegister" locale="pt-BR">
 								<template v-slot="{ inputValue, inputEvents }">
-									<input class="form-control" id="calendario" :value="inputValue" v-on="inputEvents" />
+									<input class="form-control" id="calendario" :value="inputValue"
+										v-on="inputEvents" />
 								</template>
 							</v-date-picker>
 						</div>
-						<button v-on:click="cadastrar()" type="submit" class="btn btn-primary mb-2">Salvar</button>
+						<button v-on:click="creat()" type="submit" class="btn btn-primary mb-2">Salvar</button>
 					</form>
 				</div>
 			</div>
@@ -30,8 +31,7 @@
 
 <script>
 import Header from "@/components/Header.vue";
-// import api from "../services/api.js";
-
+import diaryService from "../services/diaryService";
 
 export default {
 	name: "Home",
@@ -40,59 +40,37 @@ export default {
 	},
 	data() {
 		return {
-			diario:{
-				inputDia: "",
-				inputGratidao: "",
-				calendario: new Date(),
+			diary: {
+				dayReport: "",
+				gratitude: "",
+				dayRegister: new Date(),
+			},
+			message: {
+				error: null
 			}
 		};
 	},
 	methods: {
-		cadastrar(){
-			this.validaCamposObrigatorios();
-			// const db = firebase.database().ref(`/diarios/${window.uid}`);
-			// const id = db.push().key;
-			this.diario.id = id;
-			this.diario.calendario = this.diario.calendario.getTime();
-			// db.child(id).set(this.diario, error => {
-			// 	if(error){
-			// 		console.log(error);
-			// 	}
-			// 	else {
-			// 		// this.diario.id = null;
-			// 		// this.diario.inputDia = "";
-			// 		// this.diario.inputGratidao = "";
-			// 		// this.diario.calendario = new Date();
-			// 		this.$router.push("/diario");
-			// 	}
-			// });
+		creat() {
+			diaryService.createDiary(this.diary).then(response => {
+				this.$router.push("/diario");
+			}).catch(error => {
+				console.error(error);
+			});
 		},
-		validaCamposObrigatorios() {
-			if (this.diario.inputDia && this.diario.inputDia != "") {
-				return true;
-			}
-            
-			this.errors = [];
 
-			if (!this.diario.inputDia) {
-				console.log("AAAAAAAA");
-			}
-			if (!this.age) {
-				this.errors.push("Age required.");
-			}
-		},
 	},
 };
 </script>
 
 <style scoped>
-	#main {
-		padding: 10px;
-	}
-	#calendario {
-		width: 35%;
-	}
+#main {
+	padding: 10px;
+}
 
-	@media (min-width: 700px) {
-	}
-</style>
+#calendario {
+	width: 35%;
+}
+
+@media (min-width: 700px) {}
+</style>../services/diaryService
